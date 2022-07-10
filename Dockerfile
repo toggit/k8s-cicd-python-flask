@@ -2,6 +2,8 @@
 
 FROM python:3.10-slim-buster
 
+ENV PATH="/app/venv/bin/:/app/venv/Scripts/:/app/.local/bin:${PATH}"
+
 RUN groupadd --gid 1001 appuser  && useradd --uid 1001 -g appuser --no-log-init --create-home --shell /bin/bash -d /app appuser
 USER appuser
 WORKDIR /app
