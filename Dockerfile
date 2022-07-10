@@ -2,10 +2,13 @@
 
 FROM python:3.10-slim-buster
 
+RUN useradd -u 1001 -g appuser --no-log-init --create-home --shell /bin/bash /bin/bash appuser
+RUN python -m pip install --upgrade pip
+
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 
 COPY src/ /app
@@ -16,4 +19,4 @@ ENV PORT 8080
 
 EXPOSE 8080
 
-CMD [ "python3", "waitress_server.py"]
+CMD [ "python", "waitress_server.py"]
