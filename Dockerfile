@@ -2,7 +2,9 @@
 
 FROM python:3.10-slim-buster
 
-RUN useradd -u 1001 -g appuser --no-log-init --create-home --shell /bin/bash /bin/bash appuser
+ARG port=8080
+
+RUN addgroup -g 1001 -S appuser && useradd -u 1001 -g appuser --no-log-init --create-home --shell /bin/bash /bin/bash appuser
 RUN python -m pip install --upgrade pip
 
 WORKDIR /app
@@ -15,8 +17,8 @@ COPY src/ /app
 
 ENV FLASK_APP app
 ENV FLASK_ENV production
-ENV PORT 8080
+ENV PORT ${port}
 
-EXPOSE 8080
+EXPOSE ${port}
 
 CMD [ "python", "waitress_server.py"]
