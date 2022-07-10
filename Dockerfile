@@ -4,11 +4,11 @@ FROM python:3.10-slim-buster
 
 ARG port=8080
 
-# RUN 
-RUN groupadd --gid 1001 appuser  && useradd --uid 1001 -g appuser --no-log-init --create-home --shell /bin/bash appuser
-RUN python -m pip install --upgrade pip
-
+RUN groupadd --gid 1001 appuser  && useradd --uid 1001 -g appuser --no-log-init --create-home --shell /bin/bash -d /app appuser
+USER appuser
 WORKDIR /app
+
+RUN python -m pip install --upgrade pip
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
