@@ -2,11 +2,12 @@
 
 FROM python:3.10-slim-buster
 
-ARG port=8080
-
 RUN groupadd --gid 1001 appuser  && useradd --uid 1001 -g appuser --no-log-init --create-home --shell /bin/bash -d /app appuser
 USER appuser
 WORKDIR /app
+
+RUN python -m venv venv
+RUN . venv/bin/activate
 
 RUN python -m pip install --upgrade pip
 
@@ -16,6 +17,7 @@ RUN pip install -r requirements.txt
 
 COPY src/ /app
 
+ARG port=8080
 ENV FLASK_APP app
 ENV FLASK_ENV production
 ENV PORT ${port}
