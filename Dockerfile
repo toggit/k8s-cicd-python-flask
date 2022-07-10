@@ -4,7 +4,8 @@ FROM python:3.10-slim-buster
 
 ARG port=8080
 
-RUN addgroup -g 1001 -S appuser && useradd -u 1001 -g appuser --no-log-init --create-home --shell /bin/bash /bin/bash appuser
+# RUN 
+RUN groupadd --gid 1001 appuser  && useradd --uid 1001 -g appuser --no-log-init --create-home --shell /bin/bash appuser
 RUN python -m pip install --upgrade pip
 
 WORKDIR /app
