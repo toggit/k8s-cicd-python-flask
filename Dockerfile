@@ -9,7 +9,6 @@ RUN pip3 install -r requirements.txt
 
 
 COPY src/ /app
-COPY .env /app
 
 ENV FLASK_APP app
 ENV FLASK_ENV production
