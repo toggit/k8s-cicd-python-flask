@@ -35,8 +35,11 @@ pip install -r requirements.txt
 mkdir app
 mkdir test
 
+echo "" > __init__.py
 echo "" > app/app.py
+echo "" > app/__init__.py
 echo "" > test/pytest.py
+echo "" > test/__init__.py
 
 echo "FLASK_APP=src/app" > .env
 echo "FLASK_ENV=development" > .env
@@ -58,3 +61,10 @@ if __name__ == "__main__":
   app.run()
 ```
 
+## pytest example
+```python
+from src.app import hello
+
+def test_hello():
+  assert hello() == "Hello World!"
+```
